@@ -3,14 +3,15 @@ package pi4dusb;
 import org.bridj.Pointer;
 import pi4dusb.bindings.PiUsbLibrary;
 
-
 /**
- * The PiUsbLinearStage represents a 1D linear stage.
- *
+ * PiUsbTwisterStage
+ * <p>
+ * <p>
+ * <p>
  * Author: @haesleinhuepf
- * September 2018
+ * 09 2018
  */
-public class PiUsbLinearStage extends PiDevice {
+public class PiUsbTwisterStage extends PiDevice {
 
     private int defaultVelocity = 1;
 
@@ -21,12 +22,12 @@ public class PiUsbLinearStage extends PiDevice {
      *
      * @param serial
      */
-    public PiUsbLinearStage(int serial) {
+    public PiUsbTwisterStage(int serial) {
         Pointer<Integer> errorNumber = Pointer.allocateInt();
-        stage = (Pointer<Long>) PiUsbLibrary.piConnectMotor(errorNumber, serial);
+        stage = (Pointer<Long>) PiUsbLibrary.piConnectTwister(errorNumber, serial);
         checkError(errorNumber);
 
-        PiUsbLibrary.piHomeMotor(1, stage);
+        //checkError(PiUsbLibrary.piSetTwisterPositionZero(this.stage));
 
         errorNumber.release();
     }
@@ -36,10 +37,9 @@ public class PiUsbLinearStage extends PiDevice {
      * @return
      */
     public int getPosition() {
-        Pointer<Integer> position= Pointer.allocateInt();
+        Pointer<Integer> position = Pointer.allocateInt();
 
-        PiUsbLibrary.piGetMotorPosition(position, stage);
-
+        checkError(PiUsbLibrary.piGetTwisterPosition(position, stage));
         int result = position.getInt();
         position.release();
 
@@ -56,22 +56,21 @@ public class PiUsbLinearStage extends PiDevice {
 
     /**
      * Set the position of the stage with a given velocity
-     * @param position
+     * @param position one step corresponds to 1.8 degrees
      * @param velocity valid values range from 1 to 12
      * @return
      */
     public void setPosition(int position, int velocity) {
-        PiUsbLibrary.piRunMotorToPosition(position, velocity, stage);
+        checkError(PiUsbLibrary.piRunTwisterToPosition(position, velocity, stage));
     }
 
 
 
     public void dispose() {
-        PiUsbLibrary.piDisconnectMotor(stage);
+        PiUsbLibrary.piDisconnectTwister(stage);
     }
 
     public void setDefaultVelocity(int defaultVelocity) {
         this.defaultVelocity = defaultVelocity;
     }
-
 }

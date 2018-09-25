@@ -1,6 +1,7 @@
 package pi4dusb.demo;
 
 import pi4dusb.PiUsbLinearStage;
+import pi4dusb.PiUsbTwisterStage;
 
 /**
  * This is example code showing how to run a Picard 4D USB stage
@@ -10,16 +11,22 @@ import pi4dusb.PiUsbLinearStage;
  */
 public class PiStageDemo {
     public static void main(String... args){
-        PiUsbLinearStage stage = new PiUsbLinearStage(123);
 
-        System.out.println(stage.getPosition());
+        // Move the linear stage
+        PiUsbLinearStage linearStage = new PiUsbLinearStage(122);
+        System.out.println(linearStage.getPosition());
+        int position = linearStage.getPosition();
+        linearStage.setPosition(position + 2);
+        System.out.println(linearStage.getPosition());
+        linearStage.dispose();
 
-        int position = stage.getPosition();
-        stage.setPosition(position + 2);
+        // rotate the twister stage
+        PiUsbTwisterStage twisterStage = new PiUsbTwisterStage(28);
+        System.out.println(twisterStage.getPosition());
+        twisterStage.setPosition(twisterStage.getPosition() + 45);
+        System.out.println(twisterStage.getPosition());
+        twisterStage.dispose();
 
-        System.out.println(stage.getPosition());
-
-        stage.dispose();
     }
 }
 
