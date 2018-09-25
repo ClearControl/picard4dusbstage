@@ -1,0 +1,1 @@
+java -jar ./tools/jnaerator.jar piusb.config.win.jnaerator

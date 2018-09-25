@@ -1,0 +1,20 @@
+-library PI4DUSBStage
+#-beautifyNames
+-f
+-o src/
+-rootPackage src
+-package pi4dusb.bindings
+-arch win64 
+-libFile lib/piccard/PiUsb.lib 
+-dependencies PiUsb.dll
+-runtime BridJ
+-mode Directory
+lib/piccard/PiUsb.h
+
+
+#GdiPlus.dll
+ 
+
+
+
+  
