@@ -1,11 +1,11 @@
--library PI4DUSBStage
+-library PiUsb
 #-beautifyNames
 -f
 -o src/
 -rootPackage src
 -package pi4dusb.bindings
--arch win64 
--libFile lib/piccard/PiUsb.lib 
+-arch win64
+-libFile lib/piccard/PiUsb.dll
 -dependencies PiUsb.dll
 -runtime BridJ
 -mode Directory

@@ -1,7 +1,7 @@
 package pi4dusb;
 
 import org.bridj.Pointer;
-import pi4dusb.bindings.PI4DUSBStageLibrary;
+import pi4dusb.bindings.PiUsbLibrary;
 
 
 /**
@@ -23,9 +23,9 @@ public class PiUsbLinearStage {
      */
     public PiUsbLinearStage(int serial) {
         Pointer<Integer> errorNumber = Pointer.allocateInt();
-        stage = PI4DUSBStageLibrary.piConnectMotor(errorNumber, serial);
+        stage = PiUsbLibrary.piConnectMotor(errorNumber, serial);
 
-        PI4DUSBStageLibrary.piHomeMotor(1, stage);
+        PiUsbLibrary.piHomeMotor(1, stage);
 
         errorNumber.release();
     }
@@ -37,7 +37,7 @@ public class PiUsbLinearStage {
     public int getPosition() {
         Pointer<Integer> position= Pointer.allocateInt();
 
-        PI4DUSBStageLibrary.piGetMotorPosition(position, stage);
+        PiUsbLibrary.piGetMotorPosition(position, stage);
 
         int result = position.getInt();
         position.release();
@@ -60,13 +60,13 @@ public class PiUsbLinearStage {
      * @return
      */
     public void setPosition(int position, int velocity) {
-        PI4DUSBStageLibrary.piRunMotorToPosition(position, velocity, stage);
+        PiUsbLibrary.piRunMotorToPosition(position, velocity, stage);
     }
 
 
 
     public void dispose() {
-        PI4DUSBStageLibrary.piDisconnectMotor(stage);
+        PiUsbLibrary.piDisconnectMotor(stage);
     }
 
     public void setDefaultVelocity(int defaultVelocity) {

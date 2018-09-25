@@ -10,11 +10,16 @@ import pi4dusb.PiUsbLinearStage;
  */
 public class PiStageDemo {
     public static void main(String... args){
-        PiUsbLinearStage stage = new PiUsbLinearStage(1);
+        PiUsbLinearStage stage = new PiUsbLinearStage(123);
+
+        System.out.println(stage.getPosition());
 
         int position = stage.getPosition();
         stage.setPosition(position + 2);
 
+        System.out.println(stage.getPosition());
+
         stage.dispose();
     }
 }
+
