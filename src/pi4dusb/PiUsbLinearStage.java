@@ -3,6 +3,8 @@ package pi4dusb;
 import org.bridj.Pointer;
 import pi4dusb.bindings.PiUsbLibrary;
 
+import java.awt.*;
+
 
 /**
  * The PiUsbLinearStage represents a 1D linear stage.
@@ -26,14 +28,21 @@ public class PiUsbLinearStage extends PiDevice {
         stage = (Pointer<Long>) PiUsbLibrary.piConnectMotor(errorNumber, serial);
         checkError(errorNumber);
 
-        PiUsbLibrary.piHomeMotor(1, stage);
-
         errorNumber.release();
     }
 
     /**
+     * Home the motor.
+     * @return success
+     */
+    public boolean home() {
+        int error = PiUsbLibrary.piHomeMotor(1, stage);
+        return checkError(error);
+    }
+
+    /**
      * Read out the stage position
-     * @return
+     * @return position in steps
      */
     public int getPosition() {
         Pointer<Integer> position= Pointer.allocateInt();
@@ -46,12 +55,13 @@ public class PiUsbLinearStage extends PiDevice {
         return result;
     }
 
+
     /**
      * Set the position of the stage
-     * @param position
+     * @param position in steps
      */
     public void setPosition(int position) {
-        setPosition(position, defaultVelocity);
+        setPosition(position, defaultVelocity, true);
     }
 
     /**
@@ -60,11 +70,37 @@ public class PiUsbLinearStage extends PiDevice {
      * @param velocity valid values range from 1 to 12
      * @return
      */
-    public void setPosition(int position, int velocity) {
+    public boolean setPosition(int position, int velocity, boolean waitToFinish) {
         PiUsbLibrary.piRunMotorToPosition(position, velocity, stage);
+        if (waitToFinish) {
+            long startTime = System.currentTimeMillis();
+            while (System.currentTimeMillis() - startTime < timeoutInMillisecons) {
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+
+                boolean result = false;
+                Pointer<Integer> currentPosition = Pointer.allocateInt();
+                Pointer<Integer> moving = Pointer.allocateInt();
+                Pointer<Integer> atHome = Pointer.allocateInt();
+                PiUsbLibrary.piGetMotorStatus(currentPosition, moving, atHome, stage);
+                if (currentPosition.getInt() == position) {
+                    result = true;
+                }
+                currentPosition.release();
+                moving.release();
+                atHome.release();
+                if (result) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return true;
     }
-
-
 
     public void dispose() {
         PiUsbLibrary.piDisconnectMotor(stage);

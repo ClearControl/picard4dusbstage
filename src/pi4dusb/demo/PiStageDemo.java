@@ -16,6 +16,7 @@ public class PiStageDemo {
         PiUsbLinearStage linearStage = new PiUsbLinearStage(122);
         System.out.println(linearStage.getPosition());
         int position = linearStage.getPosition();
+        linearStage.home();
         linearStage.setPosition(position + 2);
         System.out.println(linearStage.getPosition());
         linearStage.dispose();

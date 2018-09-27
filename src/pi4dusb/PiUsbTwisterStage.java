@@ -27,8 +27,6 @@ public class PiUsbTwisterStage extends PiDevice {
         stage = (Pointer<Long>) PiUsbLibrary.piConnectTwister(errorNumber, serial);
         checkError(errorNumber);
 
-        //checkError(PiUsbLibrary.piSetTwisterPositionZero(this.stage));
-
         errorNumber.release();
     }
 
@@ -46,22 +44,46 @@ public class PiUsbTwisterStage extends PiDevice {
         return result;
     }
 
-    /**
-     * Set the position of the stage
-     * @param position
-     */
     public void setPosition(int position) {
-        setPosition(position, defaultVelocity);
+        setPosition(position, defaultVelocity, true);
     }
 
     /**
      * Set the position of the stage with a given velocity
      * @param position one step corresponds to 1.8 degrees
      * @param velocity valid values range from 1 to 12
+     * @param waitToFinish
      * @return
      */
-    public void setPosition(int position, int velocity) {
+    public boolean setPosition(int position, int velocity, boolean waitToFinish) {
         checkError(PiUsbLibrary.piRunTwisterToPosition(position, velocity, stage));
+
+        if (waitToFinish) {
+            long startTime = System.currentTimeMillis();
+            while (System.currentTimeMillis() - startTime < timeoutInMillisecons) {
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+
+                boolean result = false;
+                Pointer<Integer> currentPosition = Pointer.allocateInt();
+                Pointer<Integer> moving = Pointer.allocateInt();
+                PiUsbLibrary.piGetTwisterStatus(currentPosition, moving, stage);
+                if (currentPosition.getInt() == position) {
+                    result = true;
+                }
+                currentPosition.release();
+                moving.release();
+                if (result) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return true;
     }
 
 

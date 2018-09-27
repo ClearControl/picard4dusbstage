@@ -16,6 +16,9 @@ import static pi4dusb.bindings.PiUsbLibrary.*;
  * 09 2018
  */
 public class PiDevice {
+
+    protected long timeoutInMillisecons = 10000;
+
     protected boolean checkError(int error) {
         switch (error) {
             case PI_NO_ERROR:
@@ -55,5 +58,10 @@ public class PiDevice {
 
     protected boolean checkError(Pointer<Integer> error) {
         return checkError(error.getInt());
+    }
+
+
+    public void setTimeoutInMillisecons(long value) {
+        timeoutInMillisecons = value;
     }
 }
