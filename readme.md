@@ -8,8 +8,7 @@ http://picard-industries.com/software/usb-4d-stage.zip
 
 Using this library
 ---
-
-Usage in order to use this library to control a Picard 4D USB stage from a maven based Java project, you need to add a dependency and a repository to your `pom.xml`
+In order to use this library to control a Picard 4D USB stage from a maven based Java project, you need to add a dependency and a repository to your `pom.xml` file:
 
 ```xml
 <dependencies>
@@ -28,7 +27,7 @@ Usage in order to use this library to control a Picard 4D USB stage from a maven
 </repositories>
 ```
 
-Import the classes to connect to a stage like this:
+Import the class to connect to a stage like this:
 ```Java
 import pi4dusb.PiUsbLinearStage;
 ```
@@ -49,7 +48,7 @@ linearStage.dispose();
 ```
 
 You find example code on how to use the stage in the demo code located in the 
-[demo class](http://github.com/clearcontrol/picard4dusbstage/src/main/resources/pi4dusb/demo/PiStageDemo.java).
+[demo class](http://github.com/clearcontrol/picard4dusbstage/src/main/resources/pi4dusb/demo/PiStageDemo.java). To run the class, change the serial numbers first.
 
 
 Developing this library
