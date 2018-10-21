@@ -12,22 +12,34 @@ import pi4dusb.PiUsbTwisterStage;
 public class PiStageDemo {
     public static void main(String... args){
 
-        // Move the linear stage
-        PiUsbLinearStage linearStage = new PiUsbLinearStage(122);
-        System.out.println(linearStage.getPosition());
-        int position = linearStage.getPosition();
+        // Initialize the linear stage
+        int linearStageSerial = 122;
+        PiUsbLinearStage linearStage = new PiUsbLinearStage(linearStageSerial);
+
+        // home the stage
         linearStage.home();
-        linearStage.setPosition(position + 2);
-        System.out.println(linearStage.getPosition());
+
+        // move it ahead
+        System.out.println("Linear stage position before: " + linearStage.getPosition());
+        linearStage.setPosition(linearStage.getPosition() + 2);
+        System.out.println("Linear stage position after" + linearStage.getPosition());
+
+        //cleanup
         linearStage.dispose();
 
-        // rotate the twister stage
-        PiUsbTwisterStage twisterStage = new PiUsbTwisterStage(28);
+
+
+        // initialize the twister stage
+        int twisterStageSerial = 28;
+        PiUsbTwisterStage twisterStage = new PiUsbTwisterStage(twisterStageSerial);
+
+        // rotate the stage
         System.out.println(twisterStage.getPosition());
         twisterStage.setPosition(twisterStage.getPosition() + 45);
         System.out.println(twisterStage.getPosition());
-        twisterStage.dispose();
 
+        // clean up
+        twisterStage.dispose();
     }
 }
 
