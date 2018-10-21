@@ -1,12 +1,9 @@
 Picard 4D USB stage
 ==
 
-This library contains the device drivers of the Picard Industries 4D USB stage and
+This library contains the device drivers of the [Picard Industries 4D USB stage](http://picard-industries.com/products/usb-4d-stage.html) and
 associated java wrappers. The device driver (PiUsb.dll, PiUsb.h and PiUsb.lib) were
-kindly proviced by Picard Industries. 
-http://picard-industries.com/products/usb-4d-stage.html
-
-The files originate from here:
+kindly proviced by Picard Industries. The files originate from here:
 http://picard-industries.com/software/usb-4d-stage.zip 
 
 Using this library
@@ -52,7 +49,7 @@ linearStage.dispose();
 ```
 
 You find example code on how to use the stage in the demo code located in the 
-[demo folder](http://github.com/clearcontrol/picard4dusbstage/src/main/resources/pi4dusb/demo/PiStageDemo.java).
+[demo class](http://github.com/clearcontrol/picard4dusbstage/src/main/resources/pi4dusb/demo/PiStageDemo.java).
 
 
 Developing this library
@@ -60,12 +57,13 @@ Developing this library
 
 It is recommended to develop this library using an integraded development environment 
 such as IntelliJ or Eclipse. Open the `build.gradle` in the root directory as project
-to start developing. 
+to start developing. To check if the project was loaded correctly and the stage is functional,
+it is recommended to run the main method [demo class](http://github.com/clearcontrol/picard4dusbstage/src/main/resources/pi4dusb/demo/PiStageDemo.java).
 
 Authors
 ---
 
-[haesleinhuepf](mailto:rhaase@mpi-cbg.de)
+[Robert Haase](mailto:rhaase@mpi-cbg.de)
 
 Further information
 ---
