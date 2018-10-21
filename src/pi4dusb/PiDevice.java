@@ -8,10 +8,8 @@ import javax.xml.bind.annotation.XmlType;
 import static pi4dusb.bindings.PiUsbLibrary.*;
 
 /**
- * PiDevice
- * <p>
- * <p>
- * <p>
+ * The PiDevice class serves as mother class for all kinds of Picard USB devices.
+ *
  * Author: @haesleinhuepf
  * 09 2018
  */
@@ -61,7 +59,7 @@ public class PiDevice {
     }
 
 
-    public void setTimeoutInMillisecons(long value) {
+    public void setTimeoutInMilliseconds(long value) {
         timeoutInMillisecons = value;
     }
 }

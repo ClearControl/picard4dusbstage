@@ -60,6 +60,8 @@ such as IntelliJ or Eclipse. Open the `build.gradle` in the root directory as pr
 to start developing. To check if the project was loaded correctly and the stage is functional,
 it is recommended to run the main method [demo class](http://github.com/clearcontrol/picard4dusbstage/src/main/resources/pi4dusb/demo/PiStageDemo.java).
 
+If you want to update the generated java wrapper, update the configuration file `piusb.config.win.jnaertor` and run jnaerate.bat from the command line.
+
 Authors
 ---
 

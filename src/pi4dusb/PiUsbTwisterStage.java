@@ -4,10 +4,8 @@ import org.bridj.Pointer;
 import pi4dusb.bindings.PiUsbLibrary;
 
 /**
- * PiUsbTwisterStage
- * <p>
- * <p>
- * <p>
+ * The PiUsbTwisterStage controls a twister stage
+ *
  * Author: @haesleinhuepf
  * 09 2018
  */
