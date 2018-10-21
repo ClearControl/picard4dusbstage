@@ -15,7 +15,7 @@ In order to use this library to control a Picard 4D USB stage from a maven based
   <dependency>
     <groupId>net.clearcontrol</groupId>
     <artifactId>picard4dusbstage</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
   </dependency>
 </dependencies>
 

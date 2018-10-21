@@ -94,7 +94,7 @@ if (JavaVersion.current().isJava8Compatible()) {
 
 
 group = 'net.clearcontrol'
-version = '0.0.3'
+version = '0.0.4'
 
 
 artifacts
@@ -129,10 +129,10 @@ if(hasProperty('bintray_user') && hasProperty('bintray_key') )
 			userOrg = 'haesleinhuepf' //An optional organization name when the repo belongs to one of the user's orgs
 			name = project.name
 			desc = project.name
-			websiteUrl = 'https://github.com/ClearControl/APTJ'
-			issueTrackerUrl = 'https://github.com/ClearControl/APTJ/issues'
-			vcsUrl = 'https://github.com/ClearControl/APTJ.git'
-			licenses = ['GPL-3.0']
+			websiteUrl = 'https://github.com/ClearControl/picard4dusbstage'
+			issueTrackerUrl = 'https://github.com/ClearControl/picard4dusbstage/issues'
+			vcsUrl = 'https://github.com/ClearControl/picard4dusbstage.git'
+			licenses = ['BSD-3.0']
 			labels = [
 				'ClearControl',
 				'Drivers',
